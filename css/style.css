@@ -216,3 +216,59 @@ ul li a:hover{
 .icons ion-icon:hover{
     color: #ff7200;
 }
+
+
+
+
+
+
+
+/*.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;*/
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.user-icon {
+     margin-left: auto; /* Push the user profile to the far right */
+    position: relative; /* Position for dropdown */
+    
+    cursor: pointer;
+    display: flex;
+   
+}
+
+.user-img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 100%;
+    margin-left: 200px;
+}
+
+.profile-settings {
+    position: absolute;
+    top: 40px; /* Adjust according to your design */
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.profile-settings ul {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.profile-settings li {
+    margin: 5px 0;
+}

@@ -2,84 +2,18 @@
 <html>
 
 <head>
-     <title>Level Lux Gaming</title> 
-   
     <meta charset="utf-8">
     <meta name="color-scheme" content="dark light">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
-   
+    <title >chrome://dino/</title>
     <link rel="icon" type="image/png" href="https://p7.hiclipart.com/preview/164/924/15/google-chrome-guess-the-font-dinosaur-game-nvidia-shield-chrome.jpg">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="index.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
-    <script src="js/index.js"></script>
-     <link rel="stylesheet" href="css/style.css">
+    <script src="index.js"></script>
 </head>
 
 
-<body background="background.jpg"id="t" class="offline" {overflow: hidden; }>
-
-     <div class="main">
-
-<div class="navbar">
-    <div class="icon">
-        <h2 class="logo">Livelle Luxe</h2>
-    </div>
-
-    <div class="menu">
-        <ul>
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">ABOUT</a></li>
-            <li><a href="game.html">GAME</a></li>
-            <li><img src="user-icon.png" alt="User Icon" class="user-img"></li>
-            <li><a href="game.html">Olisten Hove</a><select name="cars" id="cars">
-    <option value="volvo">Profile </option>
-    <option value="saab">Settings</option>
-    <option value="audi">Logout</option>
-  </select></li>
-          
-        </ul>
-
-    </div>
-
-    <!--  <div class="user-icon" onclick="toggleProfileSettings()">
-             <div class="menu"><li><a href="game.html"></a></li></div>
-  <img src="user-icon.png" alt="User Icon" class="user-img"><select name="cars" id="cars">
-    <option value="volvo">Profile </option>
-    <option value="saab">Settings</option>
-    <option value="audi">Logout</option>
-  </select>
- </div> -->
-
-    <!-- <div class="user-icon" onclick="toggleProfileSettings()">
-        <span class="username">Olisten Hove</span>
-        <img src="user-icon.png" alt="User Icon" class="user-img">
-        <div class="profile-settings" id="profileSettings" style="display: visible;">
-            <ul>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
-            </ul>
-        </div>
-    </div> -->
-</div>
-
-       <!--  <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Livelle Luxe</h2>
-            </div>
-
-            <div class="menu">
-                <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="game.html">GAME</a></li>
-                   
-                </ul>
-            </div> 
-
-           
-
-        </div> -->
+<body background="background.jpg" id="t" class="offline" {overflow: hidden; }>
 
     <div.wrap {height:100%; overflow:hidden;}></div.wrap>
     <div id="messageBox" class="sendmessage">
@@ -90,7 +24,7 @@
         <div id="main-content">
             <div class="icon icon-offline" alt=""></div>
         </div>
-        <div id="offline-resources" >
+        <div id="offline-resources">
             <img id="offline-resources-1x" src="assets/default_100_percent/100-offline-sprite.png">
             <img id="offline-resources-2x" src="assets/default_200_percent/200-offline-sprite.png">
             <template id="audio-resources">
@@ -118,16 +52,7 @@
 function keyDown(e){Podium={};var n=document.createEvent("KeyboardEvent");Object.defineProperty(n,"keyCode",{get:function(){return this.keyCodeVal}}),n.initKeyboardEvent?n.initKeyboardEvent("keydown",!0,!0,document.defaultView,e,e,"","",!1,""):n.initKeyEvent("keydown",!0,!0,document.defaultView,!1,!1,!1,!1,e,0),n.keyCodeVal=e,document.body.dispatchEvent(n)}function keyUp(e){Podium={};var n=document.createEvent("KeyboardEvent");Object.defineProperty(n,"keyCode",{get:function(){return this.keyCodeVal}}),n.initKeyboardEvent?n.initKeyboardEvent("keyup",!0,!0,document.defaultView,e,e,"","",!1,""):n.initKeyEvent("keyup",!0,!0,document.defaultView,!1,!1,!1,!1,e,0),n.keyCodeVal=e,document.body.dispatchEvent(n)}setInterval(function(){Runner.instance_.horizon.obstacles.length>0&&(Runner.instance_.horizon.obstacles[0].xPos<20*Runner.instance_.currentSpeed-Runner.instance_.horizon.obstacles[0].width/2&&Runner.instance_.horizon.obstacles[0].yPos>75&&(keyUp(40),keyDown(38)),Runner.instance_.horizon.obstacles[0].xPos<20*Runner.instance_.currentSpeed-Runner.instance_.horizon.obstacles[0].width/2&&Runner.instance_.horizon.obstacles[0].yPos<=75&&keyDown(40))},5);
 */
 </script>
-<script>
-function toggleProfileSettings() {
-    const profileSettings = document.getElementById('profileSettings');
-    if (profileSettings.style.display === 'none' || profileSettings.style.display === '') {
-        profileSettings.style.display = 'block';
-    } else {
-        profileSettings.style.display = 'none';
-    }
-}
-</script>
+
 
 <script>
     document.onkeydown = function(evt) {
