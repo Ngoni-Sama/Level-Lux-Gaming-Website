@@ -12,39 +12,30 @@
 <body>
 
 
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Livelle Luxe</h2>
-            </div>
+         <div class="navbar">
+        <h2 class="logo">Livelle Luxe</h2>
+        <div class="menu">
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="game.html">GAME</a></li>
+            </ul>
+        </div>
+    </div>
 
-            <div class="menu">
-                <ul>
-                    <li><a href="home.html">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="game.html">GAME</a></li>
-                   
-                </ul>   
-            </div>
-        </div> 
-
-
-
-
-        <div class="content">
-
-
-
-
-       <div class="main">
-
+    <div class="main">
         <div class="score-section">
-            <h2>Your Score</h2>
+            <h1 style="color: white;">Your Score</h1>
             <button class="score-button">Your High Score: 1200</button>
             <button class="score-button" id="score-to-beat">Score to Beat: 1300</button>
             <button class="score-button"><a href="#" style="color: white; text-decoration: none;">Link to Rewards</a></button>
+            <div class="carousel">
+                <div class="carousel-content active">Join the adventure! Play now!</div>
+                <div class="carousel-content">Unlock new levels and rewards!</div>
+                <div class="carousel-content">Challenge your friends and prove your skills!</div>
+                <div class="carousel-content">Get exclusive in-game items today!</div>
+            </div>
         </div>
-
-
 
         <div class="leaderboard">
             <div class="leaderboard-header">
@@ -106,25 +97,12 @@
             <button class="show-more" onclick="showMore()">Show More</button>
             <button class="show-less hidden" onclick="showLess()">Show Less</button>
         </div>
-
-
-
-
     </div>
-    
-
-
-
-
-
-
-     </div>
-         
 
         
 
     <script src="script text"></script>
-  <script>
+  <!-- <script>
         let shownItems = 10;
 
         function showMore() {
@@ -172,6 +150,58 @@
         }
 
         setInterval(updateScores, 5000); // Update scores every 5 seconds
+    </script> -->
+       <script>
+        let shownItems = 10;
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-content');
+        const items = document.querySelectorAll('.leaderboard-item');
+
+        function showMore() {
+            for (let i = shownItems; i < Math.min(items.length, 20); i++) { // Show up to 20 items
+                items[i].classList.remove('hidden');
+            }
+            shownItems = 20; // Now showing top 20 items
+            if (shownItems >= items.length) {
+                document.querySelector('.show-more').style.display = 'none'; // Hide Show More button if no more items
+            }
+            document.querySelector('.show-less').classList.remove('hidden'); // Show Show Less button
+        }
+
+        function showLess() {
+            for (let i = 10; i < items.length; i++) { // Hide items after the first 10
+                items[i].classList.add('hidden');
+            }
+            shownItems = 10; // Reset to top 10 items
+            document.querySelector('.show-more').style.display = 'block'; // Show Show More button
+            document.querySelector('.show-less').classList.add('hidden'); // Hide Show Less button
+        }
+
+        function updateScores() {
+            items.forEach(item => {
+                const newScore = Math.floor(Math.random() * 1500); // Random score between 0 and 1500
+                item.setAttribute('data-score', newScore);
+                item.querySelector('.user-score').textContent = newScore;
+            });
+
+            // Sort items based on new scores
+            const sortedItems = Array.from(items).sort((a, b) => b.getAttribute('data-score') - a.getAttribute('data-score'));
+            const leaderboard = document.getElementById('leaderboard-items');
+            leaderboard.innerHTML = ''; // Clear current leaderboard
+            sortedItems.forEach(item => leaderboard.appendChild(item)); // Append sorted items
+        }
+
+        function changeSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(changeSlide, 3000); // Change slides every 3 seconds
+        setInterval(updateScores, 5000); // Update scores every 5 seconds
+
+        // Initialize the leaderboard to show only the top 10 items
+        showLess();
     </script>
 
    
