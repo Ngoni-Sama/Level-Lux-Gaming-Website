@@ -1,3 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+#slider
+{
+  //background-color: floralwhite;
+  
+  
+    overflow: hidden;
+   
+    
+   
+  
+  ul {
+    list-style: none;
+    position: absolute;
+    float: inline-start;
+    
+  
+    transition: left .2s linear;
+    -moz-transition: left .2s linear;
+    -o-transition: left .2s linear;
+    -webkit-transition: left .2s linear;
+   
+    
+    li {
+      font-family: 'Montserrat', sans-serif;
+      float: inline-start;
+     
+     
+      display: inline-block;
+          
+    }
+  }
+}
+/* Content */
+.slider-container
+{
+  color: whitesmoke;
+  font-size: 1.8em;  
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 5 auto;
+  max-width: 50px;
+  min-height: 180px;
+  padding: 5;
+  text-align:center;
+
+  span {
+    color: rgba(4,56,106,.70);
+    display: inline-block;
+    font-size: 10%;
+    font-weight: 30;
+    line-height: 1.2;
+  }
+}
+
+/*** target hooks ****/
+
+@-webkit-keyframes slide-animation {
+    0% {opacity:0;}
+    2% {opacity:1;}
+    20% {left:100px; opacity:1;}
+    22.5% {opacity:0.6;}
+    25% {left:-60px; opacity:1;}
+    45% {left:-60px; opacity:1;}
+    47.5% {opacity:0.6;}
+    50% {left:-120px; opacity:1;}
+    70% {left:-120px; opacity:1;}
+    72.5% {opacity:0.6;}
+    75% {left:-180px; opacity:1;}
+    95% {opacity:1;}
+    98% {left:-180px; opacity:0;} 
+    100% {left:0px; opacity:0;}
+}
+
+#slider ul
+{
+    -webkit-animation: slide-animation 20s infinite;
+}
+
+#slider ul:hover
+{
+    -moz-animation-play-state: paused;
+    -webkit-animation-play-state: paused;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 *{
     margin: 0;
     padding: 0;
@@ -5,14 +102,14 @@
 
 .main{
     width: 100%;
-    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(images/background.jpg);
+/*    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%);*/
     background-position: center;
-    background-size: cover;
-    height: 100vh;
+    background-size: contain;
+    height: auto;
 }
 
 .navbar{
-    width: 1200px;
+    width: 1000px;
     height: 75px;
     margin: auto;
       padding: 10px 20px;
@@ -296,7 +393,7 @@ ul li a:hover{
             margin-right: 20px;
         }
         .score-button { float:left;
-            max-width: 300px;
+            max-width: 550px;
             background: #ff7200;
             color: white;
             border: none;
@@ -380,3 +477,17 @@ ul li a:hover{
                 grid-template-columns: 1fr; /* Single column on small screens */
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
