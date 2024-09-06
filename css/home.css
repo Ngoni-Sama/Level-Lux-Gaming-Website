@@ -1,98 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
-#slider
-{
-  //background-color: floralwhite;
-  
-  
-    overflow: hidden;
-   
-    
-   
-  
-  ul {
-    list-style: none;
-    position: absolute;
-    float: inline-start;
-    
-  
-    transition: left .2s linear;
-    -moz-transition: left .2s linear;
-    -o-transition: left .2s linear;
-    -webkit-transition: left .2s linear;
-   
-    
-    li {
-      font-family: 'Montserrat', sans-serif;
-      float: inline-start;
-     
-     
-      display: inline-block;
-          
-    }
-  }
+.container {
+  width: 10px; /* change the width of the container */
+  height: 50px; /* change the height of the container */
+  border-radius: 50px; /* change the border-radius to make the corners round */
+  background-color: transparent; /* change the background color of the container */
+  align-items: center;
 }
-/* Content */
-.slider-container
-{
-  color: whitesmoke;
-  font-size: 1.8em;  
-  font-weight: 900;
-  line-height: 1.1;
-  margin: 5 auto;
-  max-width: 50px;
-  min-height: 180px;
-  padding: 5;
-  text-align:center;
-
-  span {
-    color: rgba(4,56,106,.70);
-    display: inline-block;
-    font-size: 10%;
-    font-weight: 30;
-    line-height: 1.2;
-  }
-}
-
-/*** target hooks ****/
-
-@-webkit-keyframes slide-animation {
-    0% {opacity:0;}
-    2% {opacity:1;}
-    20% {left:100px; opacity:1;}
-    22.5% {opacity:0.6;}
-    25% {left:-60px; opacity:1;}
-    45% {left:-60px; opacity:1;}
-    47.5% {opacity:0.6;}
-    50% {left:-120px; opacity:1;}
-    70% {left:-120px; opacity:1;}
-    72.5% {opacity:0.6;}
-    75% {left:-180px; opacity:1;}
-    95% {opacity:1;}
-    98% {left:-180px; opacity:0;} 
-    100% {left:0px; opacity:0;}
-}
-
-#slider ul
-{
-    -webkit-animation: slide-animation 20s infinite;
-}
-
-#slider ul:hover
-{
-    -moz-animation-play-state: paused;
-    -webkit-animation-play-state: paused;
-}
-
-
-
-
-
-
-
-
-
-
 
 
 *{
