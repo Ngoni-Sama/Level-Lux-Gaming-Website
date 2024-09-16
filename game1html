@@ -1,8 +1,9 @@
+<!doctype html>
+<html>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <title>Level Lux Gaming</title>
+     <title>Level Lux Gaming</title> 
+
     <link rel="stylesheet" href="css/game.css">
     <meta charset="utf-8">
     <meta name="color-scheme" content="dark light">
@@ -14,10 +15,10 @@
     <script src="js/index.js"></script>
     
 </head>
-<!-- <body> -->
-<body background="background.jpg"id="t" class="offline" {overflow: hidden; }>
 
-         <div class="navbar">
+
+<body background="background.jpg"id="t" class="offline" {overflow: hidden; }>
+ <div class="navbar">
         <h2 class="logo">Livelle Luxe</h2>
        <!--  <ul>
                 <li><a href="home.html">HOME</a></li>
@@ -26,9 +27,9 @@
             </ul> -->
         <div class="menu">
             <ul>
-                <li><a href="home.html">HOME</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="game.html">GAME</a></li>
+                <li><a href="home.html" onclick="navigateToPage()">HOME</a></li>
+                <li><a href="about.html" onclick="showMore()">ABOUT</a></li>
+                <li><a href="game.html" onclick="showMore()">GAME</a></li>
             </ul> 
         </div>
     </div>
@@ -98,5 +99,15 @@ function toggleProfileSettings() {
     }
 }, false);
 </script>
+
+
+
+ <script>
+        function navigateToPage() {
+            window.location.href = 'home.html'; // Replace with your desired page
+        }
+
+        document.getElementById('navigateButton').onclick = navigateToPage;
+    </script>
     
 </html>
