@@ -57,9 +57,9 @@
 }
 
 .menu{
-    width: auto;
+    width: 50%;
     float: right;
-    height: 70px;
+    height: 100%;
 }
 
 ul{
