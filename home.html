@@ -152,7 +152,7 @@
         setInterval(updateScores, 5000); // Update scores every 5 seconds
     </script> -->
        <script>
-        let shownItems = 10;
+        let shownItems = 5;
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-content');
         const items = document.querySelectorAll('.leaderboard-item');
@@ -168,11 +168,22 @@
             document.querySelector('.show-less').classList.remove('hidden'); // Show Show Less button
         }
 
-        function showLess() {
-            for (let i = 10; i < items.length; i++) { // Hide items after the first 10
+        // function showLess() {
+        //     for (let i = 10; i < items.length; i++) { // Hide items after the first 10
+        //         items[i].classList.add('hidden');
+        //     }
+        //     shownItems = 10; // Reset to top 10 items
+        //     document.querySelector('.show-more').style.display = 'block'; // Show Show More button
+        //     document.querySelector('.show-less').classList.add('hidden'); // Hide Show Less button
+        // }
+
+
+          function showLess() {
+            const items = document.querySelectorAll('.leaderboard-item');
+            for (let i = 5; i < items.length; i++) { // Hide items after the first 10
                 items[i].classList.add('hidden');
             }
-            shownItems = 10; // Reset to top 10 items
+            shownItems = 5; // Reset to top 10 items
             document.querySelector('.show-more').style.display = 'block'; // Show Show More button
             document.querySelector('.show-less').classList.add('hidden'); // Hide Show Less button
         }
