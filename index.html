@@ -5,6 +5,7 @@
     <title>Level Lux Gaming</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="'js/firebaseauth.js"></script>
+    <script type="module" src="'firebaseauth.js"></script>
 </head>
 <body>
 
@@ -33,11 +34,12 @@
 
                 
 
-                <div class="form">
+                <div class="form" method="post" action="">
+                    <div id="signInMessage" class="messageDiv" style="display:none;"></div>
                     <h2>Login Here</h2>
-                    <input type="email" name="email" placeholder="Enter Email Here">
-                    <input type="password" name="" placeholder="Enter Password Here">
-                    <button class="btnn"><a href="home.html">Login</a></button>
+                    <input type="email" id="email" placeholder="Enter Email Here" required>
+                    <input type="password" id="password" placeholder="Enter Password Here" required>
+                    <button class="btn" id="submitSignIn"> Login</button>
 
                     <p class="link">Don't have an account<br>
                     <a href="signup.html" id="submitSignUp">Sign up </a> here</a></p>
@@ -48,6 +50,8 @@
               
         </div>
     </div>
+    <script src="js/script.js"></script>
+     <script src="script.js"></script>
     <script src="script text"></script>
 </body>
 </html>
