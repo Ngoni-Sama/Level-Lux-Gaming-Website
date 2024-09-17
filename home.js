@@ -43,6 +43,7 @@ const firebaseConfig = {
         console.log("User Id not Found in Local storage")
     }
   })
+ 
 
   const logoutButton=document.getElementById('logout');
 
@@ -56,3 +57,6 @@ const firebaseConfig = {
         console.error('Error Signing out:', error);
     })
   })
+
+  // Call the function to fetch user data
+fetchUserData();
