@@ -58,5 +58,5 @@ const firebaseConfig = {
     })
   })
 
-  // Call the function to fetch user data
+  // Call the function to fetch user data and show names
 fetchUserData();
