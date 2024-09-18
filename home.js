@@ -30,9 +30,9 @@ const firebaseConfig = {
                 updateUserProfile(user);
                 const uid =user.uid;
                 return uid;
-                document.getElementById("loggedUserFName").innerText=userData.firstName;
-                document.getElementById("loggedUserEmail").innerText=userData.email;
-                document.getElementById("loggedUserLName").innerText=userData.lastName;
+                document.getElementById('loggedUserFName').innerText=userData.firstName;
+                document.getElementById('loggedUserEmail').innerText=userData.email;
+                document.getElementById('loggedUserLName').innerText=userData.lastName;
 
                 document.getElementById("userName").textContent = userName;
                   document.getElementById("userEmail").textContent = userEmail;
