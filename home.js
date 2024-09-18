@@ -16,6 +16,7 @@ const firebaseConfig = {
 
   const auth=getAuth();
   const db=getFirestore();
+  const user=auth.currentUser;
 
   onAuthStateChanged(auth, (user)=>{
     const loggedInUserId=localStorage.getItem('loggedInUserId');
@@ -26,13 +27,21 @@ const firebaseConfig = {
         .then((docSnap)=>{
             if(docSnap.exists()){
                 const userData=docSnap.data();
-                document.getElementById('loggedUserFName').innerText=userData.firstName;
-                document.getElementById('loggedUserEmail').innerText=userData.email;
-                document.getElementById('loggedUserLName').innerText=userData.lastName;
+                updateUserProfile(user);
+                const uid =user.uid;
+                return uid;
+                document.getElementById("loggedUserFName").innerText=userData.firstName;
+                document.getElementById("loggedUserEmail").innerText=userData.email;
+                document.getElementById("loggedUserLName").innerText=userData.lastName;
+
+                document.getElementById("userName").textContent = userName;
+                  document.getElementById("userEmail").textContent = userEmail;
+                    // document.getElementById("userName").textContent = userName;
 
             }
             else{
-                console.log("no document found matching id")
+                console.log("no document found matching id");
+                alert("create an account and login";
             }
         })
         .catch((error)=>{
@@ -60,3 +69,12 @@ const firebaseConfig = {
 
 //   // Call the function to fetch user data and show names
 // fetchUserData();
+function updateUserProfile(user) {
+const userName = user.displayName;
+const UserEmail = user.email;
+const updateUserProfile =user.photoURL;
+
+ document.getElementById("userName").textContent = userName;
+                  document.getElementById("userEmail").textContent = userEmail;
+                    // document.getElementById("userName").textContent = userName;
+}
