@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>   <script type="module" src="firebaseauth.js"></script>
     <title>Level Lux Gaming</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="script.js"></script>
-    <script type="module" src="firebaseauth.js"></script>
+ 
 </head>
 <body>
 
@@ -34,20 +34,17 @@
 
                 
 
-                <div class="form" method="post" action="">
-                    <div id="signInMessage" class="messageDiv" style="display:none;"></div>
-                    <h2>Login Here</h2>
-                    <input type="email" id="email" placeholder="Enter Email Here" required>
-                    <input type="password" id="password" placeholder="Enter Password Here" required>
-                    <button class="btn" id="submitSignIn"> Login</button>
+              <form class="form" method="post" action="">
+    <div id="signInMessage" class="messageDiv" style="display:none;"></div>
+    <h2>Login Here</h2>
+    <input type="email" id="email" placeholder="Enter Email Here" required>
+    <input type="password" id="password" placeholder="Enter Password Here" required>
+    <button type="submit" class="btn" id="submitSignIn">Login</button>
 
-
-                    <p class="link">Don't have an account<br>
-                    <a  href="signup.html">Sign up </a> here</a></p>
-                   
-
-                    
-                </div> 
+    <p class="link">Don't have an account?<br>
+        <a href="signup.html">Sign up</a> here
+    </p>
+</form> 
               
         </div>
     </div>
