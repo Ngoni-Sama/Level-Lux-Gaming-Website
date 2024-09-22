@@ -79,7 +79,7 @@
         showMessage('login is successful', 'signInMessage');
         const user=userCredential.user;
         localStorage.setItem('loggedInUserId', user.uid);
-        window.location.href='home.html';
+        window.location.href='game.html';
     })
     .catch((error)=>{
         const errorCode=error.code;
