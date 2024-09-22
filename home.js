@@ -71,16 +71,16 @@ const firebaseConfig = {
 
 //   // Call the function to fetch user data and show names
 // fetchUserData();
-function updateUserProfile(user) {
-const loggedUserFName = user.displayName;
-const loggedUserEmail = user.email;
-const updateUserProfile =user.photoURL;
+// function updateUserProfile(user) {
+// const loggedUserFName = user.displayName;
+// const loggedUserEmail = user.email;
+// const updateUserProfile =user.photoURL;
 
-document.getElementById("loggedUserFName").textContent=loggedUserFName;
-                document.getElementById("loggedUserEmail").textContent=loggedUserEmail;
-                document.getElementById('loggedUserLName').textContent=userData.lastName;
+// document.getElementById("loggedUserFName").textContent=loggedUserFName;
+//                 document.getElementById("loggedUserEmail").textContent=loggedUserEmail;
+//                 document.getElementById('loggedUserLName').textContent=userData.lastName;
 
- document.getElementById("userName").textContent = userName;
-                  document.getElementById("userEmail").textContent = userEmail;
-                    // document.getElementById("userName").textContent = userName;
-}
+//  document.getElementById("userName").textContent = userName;
+//                   document.getElementById("userEmail").textContent = userEmail;
+//                     // document.getElementById("userName").textContent = userName;
+// }
