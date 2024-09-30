@@ -28,6 +28,39 @@ form{
     padding:1.3rem;
     margin-bottom:0.4rem;
 }
+.navbar{
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon{
+    width: 200px;
+    float: left;
+    height: 70px;
+}
+.logo{
+   /* color: #ff7200;
+    font-size: 35px;
+    font-family: Arial;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px*/
+
+     color: #ff7200;
+    font-size: 30px;
+    font-family:'Pacifico',cursive;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+    margin-top: 5px
+}
+.menu{
+    width: 400px;
+    float: left;
+    height: 70px;
+}
 input{
     color:inherit;
     width:100%;
