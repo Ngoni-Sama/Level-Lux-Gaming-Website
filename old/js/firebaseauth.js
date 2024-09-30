@@ -33,7 +33,6 @@
     const password=document.getElementById('rPassword').value;
     const firstName=document.getElementById('fName').value;
     const lastName=document.getElementById('lName').value;
-    const score=document.getElementById('score').value;
 
     const auth=getAuth();
     const db=getFirestore();
@@ -44,8 +43,7 @@
         const userData={
             email: email,
             firstName: firstName,
-            lastName:lastName,
-            score:score
+            lastName:lastName
         };
         showMessage('Account Created Successfully', 'signUpMessage');
         const docRef=doc(db, "users", user.uid);
