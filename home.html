@@ -40,20 +40,28 @@ initial-scale=1.0">
 
         </div> 
 
-         <div class="score-section">
-            <h1 style="color: white;">Your Score</h1>
+          
+            <!-- <h1 style="color: white;">Your Score</h1> -->
+
+          <div class="score-section">
+              <div class="carousel">
+        <h1 class="carousel-content active" style="color: white;font-size: 30px;">Join the adventure! Play now!</h1>
+        <h1 class="carousel-content" style="color: white;font-size: 30px;">Unlock new levels and rewards!</h1>
+        <h1 class="carousel-content" style="color: white;font-size: 30px;">Challenge your friends and prove your skills!</h1>
+        <h1 class="carousel-content" style="color: white; font-size: 30px;">Get exclusive in-game items today!</h1>
+    </div>
+
+    <br>
+    <br>
+    <br>
             <button class="score-button">
-<div style="color: red;font-size: 16 px;"> <span id="loggedUserScore">your score:</span></div>
+<div style="color: red;font-size: 16 px;"> <span id="loggedUserScore">your score:</span>
+</div>
 
             </button>
             <button class="score-button" id="score-to-beat">Score to Beat: 1300</button>
             <button class="score-button"><a href="#" style="color: white; text-decoration: none;">Link to Rewards</a><a href="#" style="color: seagreen; text-decoration: none;">(+100 Points)</a></button>
-            <div class="carousel">
-                <div class="carousel-content active">Join the adventure! Play now!</div>
-                <div class="carousel-content">Unlock new levels and rewards!</div>
-                <div class="carousel-content">Challenge your friends and prove your skills!</div>
-                <div class="carousel-content">Get exclusive in-game items today!</div>
-            </div>
+            
         </div>
 
         <div class="leaderboard">
@@ -118,8 +126,46 @@ initial-scale=1.0">
         </div>
         
                 </div>
+                 <style>
+        .carousel {
+            position: relative;
+            overflow: hidden; /* Hides overflow content */
+            height: 60px; /* Adjust height as needed */
+        }
+
+        .carousel-content {
+            position: absolute;
+            width: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out; /* Smooth transition */
+        }
+
+        .carousel-content.active {
+            opacity: 1; /* Show active content */
+        }
+    </style>
+                 <script>
+        let currentIndex = 0;
+        const contents = document.querySelectorAll('.carousel-content');
+
+        function showNext() {
+            contents[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % contents.length; // Loop back to start
+            contents[currentIndex].classList.add('active');
+        }
+
+        setInterval(showNext, 3000); // Change slide every 3 seconds
+    </script>
 
         <script>
+
+
+
+
+
+
+
+
         let shownItems = 5;
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-content');
