@@ -5,6 +5,7 @@
             width: 50%;
             max-width: 400px;
             float:left;
+             padding:2.5rem;
         }
         .carousel {
             overflow: hidden;
@@ -39,6 +40,8 @@
         .leaderboard {
             float: right;
             width: 50%;
+             padding:1.5rem;
+
             max-width: 600px;
             background: white;
             border-radius: 8px;
