@@ -9,9 +9,25 @@ body{
     background-color: #c9d6ff;
 /*    background:linear-gradient(to right,#e2e2e2,#c9d6ff);*/
 }
+.corousel1{
+float:left ;
+font-weight:bold;
+ margin:50px auto;
+ padding:2.5rem;
+
+/*    background:#fff;*/
+    color:whitesmoke;
+  /*  width:450px;
+    padding:1.5rem;
+    margin:50px auto;
+    border-radius:10px;
+    box-shadow:0 20px 35px rgba(0,0,1,0.9);*/
+}
+
 .container{
 
-    background:#fff;
+float:right ;
+    background:whitesmoke;
     width:450px;
     padding:1.5rem;
     margin:50px auto;
@@ -49,7 +65,7 @@ form{
     margin-top: 5px*/
 
      color: #ff7200;
-    font-size: 30px;
+    font-size: 45px;
     font-family:'Pacifico',cursive;
     padding-left: 20px;
     float: left;
@@ -121,8 +137,20 @@ button{
     outline:none;
     border:none;
     width:100%;
-    background:rgb(125,125,235);
-    color:white;
+    background:orange;
+    color:whitesmoke;
+    cursor:pointer;
+    transition:0.9s;
+}
+button.btn1{
+    font-size:1.1rem;
+    padding:8px 0;
+    border-radius:5px;
+    outline:none;
+    border:none;
+    width:100%;
+    background:ghostwhite;
+    color:darkorange;
     cursor:pointer;
     transition:0.9s;
 }
