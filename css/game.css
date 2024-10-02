@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
+
+
+ .menu {
+            display: flex;
+            align-items: center; /* Aligns items vertically */
+        }
+
+        .user-image {
+            width: 50px; /* Adjust size as needed */
+            height: 50px; /* Adjust size as needed */
+            border-radius: 50%; /* Makes the image round */
+            border: 3px solid white; /* White border */
+            margin-right: 15px; /* Space between image and menu */
+        }
+
 .container {
 
   width: 10px; /* change the width of the container */
