@@ -37,6 +37,9 @@ if (signUpForm) {
         const password = document.getElementById('rPassword').value;
         const confirmPassword = document.getElementById('rConfirmPassword').value;
         const username = document.getElementById('username').value;
+        const firstName=document.getElementById('fName').value;
+        const lastName=document.getElementById('lName').value;
+
 
         if (password !== confirmPassword) {
             showMessage('Passwords do not match!', 'signUpMessage');
@@ -52,6 +55,8 @@ if (signUpForm) {
             const userData = {
                 email: email,
                 username: username,
+                firstName: firstName,
+            lastName:lastName,
             };
             await setDoc(doc(db, "users", user.uid), userData);
             showMessage('Account Created Successfully', 'signUpMessage');
