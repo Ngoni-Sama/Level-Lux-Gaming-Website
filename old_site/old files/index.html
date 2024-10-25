@@ -8,11 +8,32 @@
     <title>Register & Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- <link rel="stylesheet" href="style.css"> -->
-    <script type="module" src="js/firebaseauth.js"></script>
-    <link rel="stylesheet" href="css/style2.css">
-    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="firebaseauth.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+        <div class="navbar">
+        <h2 class="logo" >Level Lux</h2>
+    
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="corousel1">
+          
+            <h1>We’re gamers too<br>
+ <h1 style="color: darkorange;">no fuss just<br></h1>
+ timeless classics<br></h1>
+            <p class="par">A new take on a familier favourite,picked bt the community we love<br>
+ to share the fun,the challenges and the rewards that come with getting involved<br>
+ Here is a chance to grab home 5 amazon giftt cards each of $2000 to enhance your amazon <br>
+shopping experience.<br>
+ Games are a good one bro ,just keep them in the virtual family though<br>
+              
+
+
+        </div>
     <div class="container" id="signup" style="display:none;">
       <h1 class="form-title">Register</h1>
       <form method="post" action="">
@@ -52,11 +73,16 @@
       </div>
     </div>
 
+<br>
+<br>
+  
+
   <div class="container" id="signIn">
-        <h1 class="form-title">Sign In</h1>
+        <!-- <h1 class="form-title">Sign In</h1> -->
+        <button class="btn1" style="color:orangered;" >Login Here</button>
         <form method="post" action="">
           <div id="signInMessage" class="messageDiv" style="display:none;"></div>
-
+<div><br></div>
           <div class="input-group">
               <i class="fas fa-envelope"></i>
               <input type="email"  id="email" placeholder="Email" required>
@@ -70,7 +96,7 @@
           <p class="recover">
             <a href="#">Recover Password</a>
           </p>
-         <button  class="btn"  id="submitSignIn">Sign In</button>
+         <button  class="btn"  id="submitSignIn">LOGIN</button>
         </form>
         <p class="or">
           ----------or--------
@@ -84,6 +110,8 @@
           <button id="signUpButton">Sign Up</button>
         </div>
       </div>
+
+        
       <script src="script.js"></script>
 </body>
 </html>

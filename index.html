@@ -1,117 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register & Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Livelle Luxe - Login</title>
     <script type="module" src="firebaseauth.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-        <div class="navbar">
-        <h2 class="logo" >Level Lux</h2>
-    
-    </div>
-    <br>
-    <br>
-    <br>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="brand">Livelle Luxe</div>
+            <div id="carousel" class="carousel">
+                <div class="carousel-slide active">
+                    <h2 class="slide-title">We're gamers too</h2>
+                    <p class="slide-subtitle">no fuss just timeless classics</p>
+                    <p class="slide-description">Join a community that understands the thrill of the game</p>
+                </div>
+                <div class="carousel-slide">
+                    <h2 class="slide-title">Play Together</h2>
+                    <p class="slide-subtitle">connect and compete</p>
+                    <p class="slide-description">Build friendships through shared gaming experiences</p>
+                </div>
+                <div class="carousel-slide">
+                    <h2 class="slide-title">Game On</h2>
+                    <p class="slide-subtitle">your adventure awaits</p>
+                    <p class="slide-description">Discover new worlds and endless possibilities</p>
+                </div>
+            </div>
+            <div id="carousel-indicators" class="carousel-indicators"></div>
+        </div>
 
-    <div class="corousel1">
-          
-            <h1>We’re gamers too<br>
- <h1 style="color: darkorange;">no fuss just<br></h1>
- timeless classics<br></h1>
-            <p class="par">A new take on a familier favourite,picked bt the community we love<br>
- to share the fun,the challenges and the rewards that come with getting involved<br>
- Here is a chance to grab home 5 amazon giftt cards each of $2000 to enhance your amazon <br>
-shopping experience.<br>
- Games are a good one bro ,just keep them in the virtual family though<br>
-              
-
-
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <h2 class="login-title">Login Here</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" id="password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="login-button" id="submitSignIn">
+                            Login
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="signup-text">
+                        <span>Don't have an account? </span>
+                        <a href="signup.html" class="signup-link">Sign up</a>
+                    </div>
+                    <div id="signInMessage" class="message"></div> <!-- Message for sign-in feedback -->
+                </div>
+            </div>
         </div>
-    <div class="container" id="signup" style="display:none;">
-      <h1 class="form-title">Register</h1>
-      <form method="post" action="">
-        <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
-        <div class="input-group">
-           <i class="fas fa-user"></i>
-           <input type="text"  id="fName" placeholder="First Name" required>
-           <label for="fname">First Name</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text"  id="lName" placeholder="Last Name" required>
-            <label for="lName">Last Name</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-envelope"></i>
-            <input type="email"  id="rEmail" placeholder="Email" required>
-            <label for="rEmail">Email</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="rPassword"  placeholder="Password" required>
-            <label for="rPassword">Password</label>
-        </div>
-       <button class="btn" id="submitSignUp" >Sign Up</button>
-      </form>
-      <p class="or">
-        ----------or--------
-      </p>
-      <div class="icons">
-        <i class="fab fa-google"></i>
-        <i class="fab fa-facebook"></i>
-      </div>
-      <div class="links">
-        <p>Already Have Account ?</p>
-        <button id="signInButton">Sign In</button>
-      </div>
     </div>
 
-<br>
-<br>
-  
-
-  <div class="container" id="signIn">
-        <!-- <h1 class="form-title">Sign In</h1> -->
-        <button class="btn1" style="color:orangered;" >Login Here</button>
-        <form method="post" action="">
-          <div id="signInMessage" class="messageDiv" style="display:none;"></div>
-<div><br></div>
-          <div class="input-group">
-              <i class="fas fa-envelope"></i>
-              <input type="email"  id="email" placeholder="Email" required>
-              <label for="email">Email</label>
-          </div>
-          <div class="input-group">
-              <i class="fas fa-lock"></i>
-            <input type="password" id="password"  placeholder="Password" required>
-              <label for="password">Password</label>
-          </div>
-          <p class="recover">
-            <a href="#">Recover Password</a>
-          </p>
-         <button  class="btn"  id="submitSignIn">LOGIN</button>
-        </form>
-        <p class="or">
-          ----------or--------
-        </p>
-        <div class="icons">
-          <i class="fab fa-google"></i>
-          <i class="fab fa-facebook"></i>
-        </div>
-        <div class="links">
-          <p>Don't have account yet?</p>
-          <button id="signUpButton">Sign Up</button>
-        </div>
-      </div>
-
-        
-      <script src="script.js"></script>
+    <script src="js/carousel.js"></script>
 </body>
 </html>

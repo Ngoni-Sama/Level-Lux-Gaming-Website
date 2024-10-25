@@ -1,78 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level Lux Gaming</title>
-    <link rel="stylesheet" href="css/style.css">
-      <script type="module" src="js/firebaseauth.js"></script>
-     
+    <title>About Us - Livelle Luxe</title>
+    <link rel="stylesheet" href="styles/about.css">
 </head>
 <body>
-
-    <div class="main">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Level Lux</h2>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Livelle Luxe</a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="game.html">Game</a>
+                <a href="about.html">About</a>
+               
             </div>
-
-           <div class="menu">
-                <ul>
-                    <li><a href="home.html">HOME</a></li>
-                    <li><a href="game.html">GAME</a></li>
-                    <li><a href="about.html" style="border-bottom: 5px solid orange; text-decoration: none;">ABOUT</a></li>
-                <!--     <li><a href="#">SERVICE</a></li>
-                    <li><a href="#">DESIGN</a></li>
-                    <li><a href="#">CONTACT</a></li> -->
-                </ul>
-            </div> 
-
-            <div class="search">
-               <div style="color: red;font-size: 13px;"> 👤<span id="loggedUserFName"></span></div>
-    <div style="color: red;font-size: 13px;"> <span id="loggedUserLName"></span></div>
-    <div style="color: red;font-size: 13px;"> <span id="loggedUserEmail"></span></div>
-    <button  class="score-button" id="logout">Logout</button>
-            </div> 
-
-        </div> 
-        <div class="content">
-         
-
-  <h1>About Us</h1>
-            <p class="par">Online gaming website where a simple jumping dinosaur game  is played for a chance to win an amazon shopping gift card<br>.This gift card is worth $2000 ,<br> which when a player wins , can use to shop for anything they want on amazon online shop , within the money range.<br> Only the top ten highest scoring players get to win each the very same gift cards. The scores are reset after each and every month , starting the next month with a new fresh competition for the gift cards.<br> Winners et emails send to them , giving gift card details and necessary steps on how to use it before its 2 weeks expiry..
-              
-
-                <button class="cn"><a href="#">Follow US</a></button>
-
-
-<!-- <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
-                <div class="form">
-                    <h2>Sign Up</h2>
-                      <input type="text" id="fName"  placeholder=" First Name">
-                    <input type="text" id="lName" placeholder="last name">
-                    <input type="email" id="rEmail" placeholder="Email ">
-                    <input type="password"  id="rPassword" name="" placeholder="Password ">
-                    <input type="hidden" id="Score" value="0">
-
-                    
-                    <button class="btnn" id="submitSignUp"><a>Submit</a></button>
-
-                   <!--  <p class="link">Don't have an account<br>
-                    <a href="#">Sign up </a> here</a></p> -->
-                    <p class="liw">follow us on</p>
-
-                    <div class="icons">
-                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-                    </div>
-
-                </div>
-                    </div>
-                </div>
+            <div class="user-profile">
+            <div class="user-avatar">👤</div>
+            <span id="loggedUserLName"></span>
         </div>
+        </div>
+    </nav>
+   
+
+
+    <main>
+         <div>
+        <span>one</span>\n\n\n\n\n\n\n\n\n\n\n\n\n<span>two</span>
     </div>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script> 
+      <div>
+        <span>one</span>\n\n\n\n\n\n\n\n\n\n\n\n\n<span>two</span>
+    </div>
+        <div class="content-container">
+            <div class="carousel-section">
+                <div class="carousel-content active">
+                    <h1>We're gamers too</h1>
+                    <h2>no fuss just timeless classics</h2>
+                    <p>Join our community of passionate gamers who appreciate the simplicity and charm of classic gaming experiences.</p>
+                </div>
+                <div class="carousel-content">
+                    <h1>Win Amazing Prizes</h1>
+                    <h2>including Amazon gift cards</h2>
+                    <p>Participate in our gaming challenges and tournaments for a chance to win valuable rewards and recognition.</p>
+                </div>
+                <div class="carousel-content">
+                    <h1>Join Our Community</h1>
+                    <h2>connect with fellow gamers</h2>
+                    <p>Be part of a growing network of players who share your love for gaming and competitive spirit.</p>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="indicator active"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                </div>
+            </div>
+            <div class="prize-section">
+                <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Amazon Gift Card">
+                <div class="prize-amount">$2,000.00</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-content');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentSlide = 0;
+            let autoplayInterval;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function startAutoplay() {
+                autoplayInterval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoplay() {
+                clearInterval(autoplayInterval);
+            }
+
+            // Event listeners for indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                    stopAutoplay();
+                    startAutoplay();
+                });
+            });
+
+            // Touch swipe functionality for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.querySelector('.carousel-section').addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            document.querySelector('.carousel-section').addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const difference = touchStartX - touchEndX;
+                
+                if (Math.abs(difference) > swipeThreshold) {
+                    if (difference > 0) {
+                        // Swipe left
+                        currentSlide = (currentSlide + 1) % slides.length;
+                    } else {
+                        // Swipe right
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    }
+                    showSlide(currentSlide);
+                    stopAutoplay();
+                    startAutoplay();
+                }
+            }
+
+            // Start autoplay
+            startAutoplay();
+
+            // Pause autoplay when user interacts with carousel
+            const carouselSection = document.querySelector('.carousel-section');
+            carouselSection.addEventListener('mouseenter', stopAutoplay);
+            carouselSection.addEventListener('mouseleave', startAutoplay);
+            carouselSection.addEventListener('touchstart', stopAutoplay);
+            carouselSection.addEventListener('touchend', startAutoplay);
+        });
+    </script>
 </body>
 </html>

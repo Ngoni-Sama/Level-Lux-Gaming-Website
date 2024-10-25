@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Level Lux Gaming</title>
-    <link rel="stylesheet" href="css/style.css">
-      <script type="module" src="js/firebaseauth.js"></script>
-     
+    <title>Sign Up - Livelle Luxe</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-
-    <div class="main">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Livelle Luxe</h2>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h6m4 0h10"/><path d="M2 12h18m-8 0v8m6-8v8M6 12v8"/><path d="M18 6c0-1.1-.9-2-2-2H8a2 2 0 0 0-2 2"/></svg>
+                Livelle Luxe
             </div>
 
-            <!-- <div class="menu">
-                <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">ABOUT</a></li>
-                    <li><a href="#">SERVICE</a></li>
-                    <li><a href="#">DESIGN</a></li>
-                    <li><a href="#">CONTACT</a></li>
-                </ul>
-            </div> -->
-
-          <!--   <div class="search">
-                <input class="srch" type="search" name="" placeholder="Type To text">
-                <a href="#"> <button class="btn">Search</button></a>
-            </div> -->
-
-        </div> 
-        <div class="content">
-          <!--   <h1>Web Design & <br><span>Development</span> <br>Course</h1>
-            <p class="par">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt neque 
-                 expedita atque eveniet <br> quis nesciunt. Quos nulla vero consequuntur, fugit nemo ad delectus 
-                <br> a quae totam ipsa illum minus laudantium?</p> -->
-
-
- <h1>We're gamers too<br><span>no fuss just</span> <br>timeless classics</h1>
-            <p class="par">A new take on a familier favourite,picked by the community we love <br> to share the fun,the challenges and the rewards that come with getting involved.
-                <br>Games are a good one bro , just keep them in the virtual family though</p>
-                <button class="cn"><a href="#">JOIN US</a></button>
-
-
-<div id="signUpMessage" class="messageDiv" style="display:none;"></div>
-                <div class="form">
-                    <h2>Sign Up</h2>
-                      <input type="text" id="fName"  placeholder=" First Name">
-                    <input type="text" id="lName" placeholder="last name">
-                    <input type="email" id="rEmail" placeholder="Email ">
-                    <input type="password"  id="rPassword" name="" placeholder="Password ">
-                    <input type="hidden" id="Score" value="0">
-
-                    
-                    <button class="btnn" id="submitSignUp"><a>Submit</a></button>
-
-                   <!--  <p class="link">Don't have an account<br>
-                    <a href="#">Sign up </a> here</a></p> -->
-                    <p class="liw">Log in with</p>
-
-                    <div class="icons">
-                        <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-google"></ion-icon></a>
-                        <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
-                    </div>
-
+            <div id="carousel" class="carousel">
+                <div class="carousel-slide active">
+                    <h1 class="slide-title">Join Our Community</h1>
+                    <h2 class="slide-subtitle">become a member today</h2>
+                    <p class="slide-description">Start your gaming journey with us and connect with players worldwide.</p>
                 </div>
-                    </div>
+                <div class="carousel-slide">
+                    <h1 class="slide-title">Unlock Benefits</h1>
+                    <h2 class="slide-subtitle">exclusive features await</h2>
+                    <p class="slide-description">Get access to premium features and special gaming events.</p>
                 </div>
+                <div class="carousel-slide">
+                    <h1 class="slide-title">Ready Player One</h1>
+                    <h2 class="slide-subtitle">your story begins here</h2>
+                    <p class="slide-description">Create your gaming profile and start building your legacy.</p>
+                </div>
+            </div>
+
+            <div id="carousel-indicators" class="carousel-indicators"></div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <h2 class="login-title">Create Account</h2>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-input" id="username" placeholder="Choose a username" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="rEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" id="rPassword" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-input" id="rConfirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="login-button" id="submitSignUp">
+                            Sign Up
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                    <div class="signup-text">
+                        <span>Already have an account? </span>
+                        <a href="index.html" class="signup-link">Login</a>
+                    </div>
+                    <div id="signUpMessage" class="message"></div> <!-- Message for sign-up feedback -->
+                </div>
+            </div>
         </div>
     </div>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="js/carousel.js"></script>
+    <script type="module" src="firebaseauth.js"></script> <!-- Link to your Firebase auth script -->
 </body>
 </html>
