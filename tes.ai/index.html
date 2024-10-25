@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livelle Luxe - Login</title>
+    <script type="module" src="firebaseauth.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="brand">Livelle Luxe</div>
+            <div id="carousel" class="carousel">
+                <div class="carousel-slide active">
+                    <h2 class="slide-title">We're gamers too</h2>
+                    <p class="slide-subtitle">no fuss just timeless classics</p>
+                    <p class="slide-description">Join a community that understands the thrill of the game</p>
+                </div>
+                <div class="carousel-slide">
+                    <h2 class="slide-title">Play Together</h2>
+                    <p class="slide-subtitle">connect and compete</p>
+                    <p class="slide-description">Build friendships through shared gaming experiences</p>
+                </div>
+                <div class="carousel-slide">
+                    <h2 class="slide-title">Game On</h2>
+                    <p class="slide-subtitle">your adventure awaits</p>
+                    <p class="slide-description">Discover new worlds and endless possibilities</p>
+                </div>
+            </div>
+            <div id="carousel-indicators" class="carousel-indicators"></div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <h2 class="login-title">Login Here</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" id="password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="login-button" id="submitSignIn">
+                            Login
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="signup-text">
+                        <span>Don't have an account? </span>
+                        <a href="signup.html" class="signup-link">Sign up</a>
+                    </div>
+                    <div id="signInMessage" class="message"></div> <!-- Message for sign-in feedback -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/carousel.js"></script>
+</body>
+</html>

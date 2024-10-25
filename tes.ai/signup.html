@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Livelle Luxe</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h6m4 0h10"/><path d="M2 12h18m-8 0v8m6-8v8M6 12v8"/><path d="M18 6c0-1.1-.9-2-2-2H8a2 2 0 0 0-2 2"/></svg>
+                Livelle Luxe
+            </div>
+
+            <div id="carousel" class="carousel">
+                <div class="carousel-slide active">
+                    <h1 class="slide-title">Join Our Community</h1>
+                    <h2 class="slide-subtitle">become a member today</h2>
+                    <p class="slide-description">Start your gaming journey with us and connect with players worldwide.</p>
+                </div>
+                <div class="carousel-slide">
+                    <h1 class="slide-title">Unlock Benefits</h1>
+                    <h2 class="slide-subtitle">exclusive features await</h2>
+                    <p class="slide-description">Get access to premium features and special gaming events.</p>
+                </div>
+                <div class="carousel-slide">
+                    <h1 class="slide-title">Ready Player One</h1>
+                    <h2 class="slide-subtitle">your story begins here</h2>
+                    <p class="slide-description">Create your gaming profile and start building your legacy.</p>
+                </div>
+            </div>
+
+            <div id="carousel-indicators" class="carousel-indicators"></div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="login-container">
+                <div class="login-box">
+                    <h2 class="login-title">Create Account</h2>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-input" id="username" placeholder="Choose a username" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" id="rEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" id="rPassword" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-input" id="rConfirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="login-button" id="submitSignUp">
+                            Sign Up
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                    <div class="signup-text">
+                        <span>Already have an account? </span>
+                        <a href="index.html" class="signup-link">Login</a>
+                    </div>
+                    <div id="signUpMessage" class="message"></div> <!-- Message for sign-up feedback -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/carousel.js"></script>
+    <script type="module" src="firebaseauth.js"></script> <!-- Link to your Firebase auth script -->
+</body>
+</html>
