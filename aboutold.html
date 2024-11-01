@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Livelle Luxe</title>
+    <link rel="stylesheet" href="styles/about.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Livelle Luxe</a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="game.html">Game</a>
+                <a href="about.html">About</a>
+               
+            </div>
+            <div class="user-profile">
+            <div class="user-avatar">👤</div>
+            <span id="loggedUserLName"></span>
+        </div>
+        </div>
+    </nav>
+   
+
+
+    <main>
+         <div>
+        <span>one</span>\n\n\n\n\n\n\n\n\n\n\n\n\n<span>two</span>
+    </div>
+      <div>
+        <span>one</span>\n\n\n\n\n\n\n\n\n\n\n\n\n<span>two</span>
+    </div>
+        <div class="content-container">
+            <div class="carousel-section">
+                <div class="carousel-content active">
+                    <h1>We're gamers too</h1>
+                    <h2>no fuss just timeless classics</h2>
+                    <p>Join our community of passionate gamers who appreciate the simplicity and charm of classic gaming experiences.</p>
+                </div>
+                <div class="carousel-content">
+                    <h1>Win Amazing Prizes</h1>
+                    <h2>including Amazon gift cards</h2>
+                    <p>Participate in our gaming challenges and tournaments for a chance to win valuable rewards and recognition.</p>
+                </div>
+                <div class="carousel-content">
+                    <h1>Join Our Community</h1>
+                    <h2>connect with fellow gamers</h2>
+                    <p>Be part of a growing network of players who share your love for gaming and competitive spirit.</p>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="indicator active"></div>
+                    <div class="indicator"></div>
+                    <div class="indicator"></div>
+                </div>
+            </div>
+            <div class="prize-section">
+                <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Amazon Gift Card">
+                <div class="prize-amount">$2,000.00</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-content');
+            const indicators = document.querySelectorAll('.indicator');
+            let currentSlide = 0;
+            let autoplayInterval;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            function startAutoplay() {
+                autoplayInterval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoplay() {
+                clearInterval(autoplayInterval);
+            }
+
+            // Event listeners for indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                    stopAutoplay();
+                    startAutoplay();
+                });
+            });
+
+            // Touch swipe functionality for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.querySelector('.carousel-section').addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            document.querySelector('.carousel-section').addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const difference = touchStartX - touchEndX;
+                
+                if (Math.abs(difference) > swipeThreshold) {
+                    if (difference > 0) {
+                        // Swipe left
+                        currentSlide = (currentSlide + 1) % slides.length;
+                    } else {
+                        // Swipe right
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    }
+                    showSlide(currentSlide);
+                    stopAutoplay();
+                    startAutoplay();
+                }
+            }
+
+            // Start autoplay
+            startAutoplay();
+
+            // Pause autoplay when user interacts with carousel
+            const carouselSection = document.querySelector('.carousel-section');
+            carouselSection.addEventListener('mouseenter', stopAutoplay);
+            carouselSection.addEventListener('mouseleave', startAutoplay);
+            carouselSection.addEventListener('touchstart', stopAutoplay);
+            carouselSection.addEventListener('touchend', startAutoplay);
+        });
+    </script>
+</body>
+</html>

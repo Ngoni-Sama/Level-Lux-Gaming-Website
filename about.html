@@ -4,141 +4,600 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Livelle Luxe</title>
-    <link rel="stylesheet" href="styles/about.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0e1218;
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: #1a2028;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            color: #ff6b00;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b00;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ff6b00;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        main {
+            padding-top: 5rem;
+        }
+
+        .hero-section {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1920&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ff6b00;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-section {
+            padding: 4rem 2rem;
+            background: #1a2028;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: #2a3441;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            color: #ff6b00;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #888;
+        }
+
+        .features-section {
+            padding: 4rem 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #1a2028;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #ff6b00;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .team-section {
+            padding: 4rem 2rem;
+            background: #1a2028;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: #2a3441;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-role {
+            color: #ff6b00;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-link {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #ff6b00;
+        }
+
+        .newsletter-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1920&q=80') center/cover;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .newsletter-button {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            background: #ff6b00;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-button:hover {
+            background: #ff8533;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #1a2028;
+                padding: 0.75rem;
+                justify-content: space-around;
+            }
+
+            main {
+                padding-bottom: 4rem;
+            }
+        }
+
+        .achievement-section {
+            padding: 4rem 2rem;
+        }
+
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: #1a2028;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .achievement-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .achievement-icon {
+            font-size: 2rem;
+            color: #ff6b00;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-description {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ff6b00;
+            font-size: 2rem;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">Livelle Luxe</a>
-            <div class="nav-links">
-                <a href="home.html">Home</a>
-                <a href="game.html">Game</a>
-                <a href="about.html">About</a>
-               
-            </div>
-            <div class="user-profile">
-            <div class="user-avatar">👤</div>
-            <span id="loggedUserLName"></span>
+    <nav class="navbar">
+        <a href="home.html" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 6h6m4 0h10"/>
+                <path d="M2 12h18m-8 0v8m6-8v8M6 12v8"/>
+                <path d="M18 6c0-1.1-.9-2-2-2H8a2 2 0 0 0-2 2"/>
+            </svg>
+            Livelle Luxe
+        </a>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="game.html">Game</a>
+            <a href="about.html" class="active">About</a>
+            <a href="profile.html">Profile</a>
         </div>
+        <div class="user-profile" id="userProfileNav">
+            <div class="user-avatar">
+                <img id="userAvatar" src="https://via.placeholder.com/32" alt="User avatar">
+            </div>
+            <span id="userName">Loading...</span>
         </div>
     </nav>
-   
-
 
     <main>
-         <div>
-        <span>one</span>\n\n\n\n\n\n\n\n\n\n\n\n\n<span>two</span>
-    </div>
-      <div>
-        <span>one</span>\n\n\n\n\n\n\n\n\n\n\n\n\n<span>two</span>
-    </div>
-        <div class="content-container">
-            <div class="carousel-section">
-                <div class="carousel-content active">
-                    <h1>We're gamers too</h1>
-                    <h2>no fuss just timeless classics</h2>
-                    <p>Join our community of passionate gamers who appreciate the simplicity and charm of classic gaming experiences.</p>
+        <section class="hero-section fade-in">
+            <div class="hero-content">
+                <h1>Welcome to Livelle Luxe</h1>
+                <p>Experience the thrill of classic gaming reimagined for the modern era. Join our community of passionate gamers and compete for amazing prizes!</p>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h2 class="section-title">Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="totalPlayers">0</div>
+                    <div class="stat-label">Active Players</div>
                 </div>
-                <div class="carousel-content">
-                    <h1>Win Amazing Prizes</h1>
-                    <h2>including Amazon gift cards</h2>
-                    <p>Participate in our gaming challenges and tournaments for a chance to win valuable rewards and recognition.</p>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="totalGames">0</div>
+                    <div class="stat-label">Games Played</div>
                 </div>
-                <div class="carousel-content">
-                    <h1>Join Our Community</h1>
-                    <h2>connect with fellow gamers</h2>
-                    <p>Be part of a growing network of players who share your love for gaming and competitive spirit.</p>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="prizesAwarded">$0</div>
+                    <div class="stat-label">Prizes Awarded</div>
                 </div>
-                <div class="carousel-indicators">
-                    <div class="indicator active"></div>
-                    <div class="indicator"></div>
-                    <div class="indicator"></div>
+                <div class="stat-card fade-in">
+                    <div class="stat-value" id="topScore">0</div>
+                    <div class="stat-label">Highest Score</div>
                 </div>
             </div>
-            <div class="prize-section">
-                <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Amazon Gift Card">
-                <div class="prize-amount">$2,000.00</div>
+        </section>
+
+        <section class="features-section">
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Classic Gaming</h3>
+                    <p>Experience the nostalgia of classic games with modern twists and competitive elements.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Real Prizes</h3>
+                    <p>Compete for Amazon gift cards and other exciting rewards in our regular tournaments.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">Active Community</h3>
+                    <p>Join a vibrant community of gamers who share your passion for competition.</p>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="achievement-section">
+            <h2 class="section-title">Latest Achievements</h2>
+            <div class="achievement-grid" id="achievementsList">
+                <!-- Achievements will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section class="newsletter-section">
+            <div class="newsletter-content">
+                <h2 class="section-title">Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest updates, tournaments, and prize announcements.</p>
+                <form id="newsletterForm" class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </section>
     </main>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.carousel-content');
-            const indicators = document.querySelectorAll('.indicator');
-            let currentSlide = 0;
-            let autoplayInterval;
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js';
+        import { getFirestore, doc, getDoc, collection, getDocs, addDoc, query, orderBy, limit } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
 
-            function showSlide(index) {
-                slides.forEach(slide => slide.classList.remove('active'));
-                indicators.forEach(indicator => indicator.classList.remove('active'));
-                slides[index].classList.add('active');
-                indicators[index].classList.add('active');
-            }
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDn6WbXzDYx-gZ1KInvzGD1bkLGdHdt9h0",
+            authDomain: "login-with-firebase-data-84ad9.firebaseapp.com",
+            projectId: "login-with-firebase-data-84ad9",
+            storageBucket: "login-with-firebase-data-84ad9.appspot.com",
+            messagingSenderId: "939532832658",
+            appId: "1:939532832658:web:df10ae63062aabf692fb4b"
+        };
 
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
-            }
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore();
 
-            function startAutoplay() {
-                autoplayInterval = setInterval(nextSlide, 5000);
-            }
-
-            function stopAutoplay() {
-                clearInterval(autoplayInterval);
-            }
-
-            // Event listeners for indicators
-            indicators.forEach((indicator, index) => {
-                indicator.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                    stopAutoplay();
-                    startAutoplay();
-                });
-            });
-
-            // Touch swipe functionality for mobile
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            document.querySelector('.carousel-section').addEventListener('touchstart', e => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, false);
-            
-            document.querySelector('.carousel-section').addEventListener('touchend', e => {
-                touchEndX = e.changedTouches[0].screenX;
-                handleSwipe();
-            }, false);
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const difference = touchStartX - touchEndX;
-                
-                if (Math.abs(difference) > swipeThreshold) {
-                    if (difference > 0) {
-                        // Swipe left
-                        currentSlide = (currentSlide + 1) % slides.length;
-                    } else {
-                        // Swipe right
-                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        // Check authentication
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    document.getElementById('userName').textContent = userData.firstName || 'Player';
+                    
+                    // Load user avatar
+                    const savedImage = localStorage.getItem('profileImage');
+                    if (savedImage) {
+                        document.getElementById('userAvatar').src = savedImage;
                     }
-                    showSlide(currentSlide);
-                    stopAutoplay();
-                    startAutoplay();
                 }
+            } else {
+                window.location.href = 'index.html';
             }
+        });
 
-            // Start autoplay
-            startAutoplay();
+        // Load statistics
+        async function loadStats() {
+            try {
+                const statsDoc = await getDoc(doc(db, 'statistics', 'global'));
+                if (statsDoc.exists()) {
+                    const stats = statsDoc.data();
+                    document.getElementById('totalPlayers').textContent = stats.totalPlayers || 0;
+                    document.getElementById('totalGames').textContent = stats.totalGames || 0;
+                    document.getElementById('prizesAwarded').textContent = `$${stats.prizesAwarded || 0}`;
+                    document.getElementById('topScore').textContent = stats.highestScore || 0;
+                }
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        }
 
-            // Pause autoplay when user interacts with carousel
-            const carouselSection = document.querySelector('.carousel-section');
-            carouselSection.addEventListener('mouseenter', stopAutoplay);
-            carouselSection.addEventListener('mouseleave', startAutoplay);
-            carouselSection.addEventListener('touchstart', stopAutoplay);
-            carouselSection.addEventListener('touchend', startAutoplay);
+        // Load achievements
+        async function loadAchievements() {
+            try {
+                const achievementsQuery = query(collection(db, 'achievements'), orderBy('timestamp', 'desc'), limit(6));
+                const querySnapshot = await getDocs(achievementsQuery);
+                
+                let html = '';
+                querySnapshot.forEach(doc => {
+                    const achievement = doc.data();
+                    html += `
+                        <div class="achievement-card fade-in">
+                            <div class="achievement-icon">${achievement.icon}</div>
+                            <h3 class="achievement-title">${achievement.title}</h3>
+                            <p class="achievement-description">${achievement.description}</p>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('achievementsList').innerHTML = html;
+            } catch (error) {
+                console.error('Error loading achievements:', error);
+            }
+        }
+
+        // Newsletter subscription
+        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            
+            try {
+                await addDoc(collection(db, 'newsletters'), {
+                    email: email,
+                    timestamp: new Date().toISOString()
+                });
+                alert('Thank you for subscribing!');
+                e.target.reset();
+            } catch (error) {
+                console.error('Error subscribing:', error);
+                alert('Error subscribing to newsletter');
+            }
+        });
+
+        // Fade-in animation
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        const observer = new IntersectionObserver(handleIntersection, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Initial load
+        loadStats();
+        loadAchievements();
+
+        // Profile navigation
+        document.getElementById('userProfileNav').addEventListener('click', () => {
+            window.location.href = 'profile.html';
         });
     </script>
 </body>
