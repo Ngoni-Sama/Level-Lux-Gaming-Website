@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="home.js"></script> 
     <title>Livelle Luxe - Gaming Platform</title>
     <style>
         * {
@@ -29,14 +28,17 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
             color: #ff6b00;
             font-size: 1.5rem;
             font-weight: bold;
-            white-space: nowrap;
-            font-family:'Pacifico',cursive;
+            font-family: 'Pacifico', cursive;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-links {
@@ -50,6 +52,11 @@
             padding: 0.5rem 0.75rem;
             position: relative;
             font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b00;
         }
 
         .nav-links a.active::after {
@@ -66,6 +73,14 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .user-profile:hover {
+            background-color: rgba(255, 107, 0, 0.1);
         }
 
         .user-avatar {
@@ -76,12 +91,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
+            overflow: hidden;
         }
 
-        .user-profile span {
-            font-size: 0.9rem;
-            display: none;
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .main-content {
@@ -101,6 +117,8 @@
             align-items: center;
             text-align: center;
             padding: 0 1rem;
+            color: #ff6b00;
+            font-style: italic;
         }
 
         .stats-container {
@@ -111,11 +129,27 @@
 
         .stat-box {
             background-color: #1a2028;
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.2);
+        }
+
+        .stat-box.yellow-box {
+            background: linear-gradient(135deg, rgba(255, 235, 59, 0.1), rgba(255, 235, 59, 0.05));
+            border: 1px solid rgba(255, 235, 59, 0.2);
+        }
+
+        .stat-box.pink-box {
+            background: linear-gradient(135deg, rgba(255, 192, 203, 0.1), rgba(255, 192, 203, 0.05));
+            border: 1px solid rgba(255, 192, 203, 0.2);
         }
 
         .leaderboard {
@@ -123,20 +157,29 @@
             padding: 1.5rem;
             border-radius: 12px;
             height: fit-content;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .leaderboard-title {
             font-size: 1.2rem;
             margin-bottom: 1rem;
             text-align: center;
+            color: #ff6b00;
+            font-weight: bold;
         }
 
         .leaderboard-item {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.75rem 0;
+            padding: 0.75rem;
             border-bottom: 1px solid #2a3441;
+            transition: background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .leaderboard-item:hover {
+            background-color: #2a3441;
         }
 
         .leaderboard-avatar {
@@ -146,71 +189,41 @@
             object-fit: cover;
         }
 
+        .leaderboard-info {
+            flex: 1;
+        }
+
+        .leaderboard-name {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .leaderboard-date {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
         .score {
             margin-left: auto;
             color: #ff6b00;
             font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        .yellow-box {
-            background-color: rgba(255, 235, 59, 0.1);
+        .achievement-badge {
+            width: 24px;
+            height: 24px;
+            margin-left: 0.5rem;
         }
 
-        .pink-box {
-            background-color: rgba(255, 192, 203, 0.1);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .quote-text {
-            animation: fadeIn 0.5s ease-in;
-            width: 100%;
-        }
-
-        /* Tablet and up */
         @media (min-width: 768px) {
-            .navbar {
-                padding: 1rem 2rem;
-            }
-
-            .nav-links {
-                gap: 2rem;
-            }
-
-            .nav-links a {
-                font-size: 1rem;
-                padding: 0.5rem 1rem;
-            }
-
-            .user-profile span {
-                display: block;
-            }
-
-            .user-avatar {
-                width: 40px;
-                height: 40px;
-            }
-
-            .quote-carousel {
-                font-size: 1.5rem;
-                min-height: 80px;
-            }
-
             .main-content {
-                padding: 7rem 2rem 2rem;
                 grid-template-columns: 1fr 300px;
-            }
-
-            .stats-container {
-                grid-template-columns: 1fr;
+                padding: 7rem 2rem 2rem;
             }
         }
 
-        /* Mobile menu for very small screens */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
                 bottom: 0;
@@ -222,150 +235,238 @@
                 box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
             }
 
-            .nav-links a {
-                padding: 0.5rem;
-                font-size: 0.8rem;
-                text-align: center;
-            }
-
-            .nav-links a.active::after {
-                bottom: -0.75rem;
-            }
-
             .main-content {
                 padding-bottom: 4rem;
             }
         }
 
-        /* Hover effects for desktop */
-        @media (hover: hover) {
-            .nav-links a:hover {
-                color: #ff6b00;
-            }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
 
-            .stat-box:hover {
-                transform: translateY(-2px);
-                transition: transform 0.2s ease;
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
             }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
 
-            .leaderboard-item:hover {
-                background-color: #2a3441;
-                border-radius: 8px;
-            }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo">Livelle Luxe</div>
+        <div class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 6h6m4 0h10"/>
+                <path d="M2 12h18m-8 0v8m6-8v8M6 12v8"/>
+                <path d="M18 6c0-1.1-.9-2-2-2H8a2 2 0 0 0-2 2"/>
+            </svg>
+            Livelle Luxe
+        </div>
         <div class="nav-links">
             <a href="home.html" class="active">Home</a>
             <a href="game.html">Game</a>
-            <a href="about.html">About</a>
+            <a href="profile.html">Profile</a>
         </div>
-        <div class="user-profile" >
-            <div class="user-avatar">👤</div>
-            <span id="loggedUserfName"></span>
+        <div class="user-profile" id="userProfileNav">
+            <div class="user-avatar">
+                <img id="userAvatar" src="https://via.placeholder.com/32" alt="User avatar">
+            </div>
+            <span id="loggedUserName">Loading...</span>
         </div>
     </nav>
 
     <main class="main-content">
         <div class="left-section">
             <div class="quote-carousel">
-                <p class="quote-text">"Always join new players with your personalised link to gain more points to add on to your highest score"</p>
+                <p class="quote-text fade-in">"Challenge yourself to reach new heights!"</p>
             </div>
 
             <div class="stats-container">
-                <div class="stat-box yellow-box">
-                    <span>Your high score</span>
-                    
-                     <span id="loggedUserScore"></span>
+                <div class="stat-box yellow-box pulse">
+                    <div>
+                        <h3>Your High Score</h3>
+                        <p id="userHighScore">Loading...</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                        <path d="M4 22h16"/>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                    </svg>
                 </div>
                 <div class="stat-box">
-                    <span>Score to beat</span>
-                    <span class="score">6570</span>
+                    <div>
+                        <h3>Score to Beat</h3>
+                        <p id="topScore">Loading...</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                        <path d="M5 3v4"/>
+                        <path d="M19 17v4"/>
+                        <path d="M3 5h4"/>
+                        <path d="M17 19h4"/>
+                    </svg>
                 </div>
                 <div class="stat-box pink-box">
-                    <span>Link rewards</span>
-                    <span class="score">5</span>
+                    <div>
+                        <h3>Games Played</h3>
+                        <p id="gamesPlayed">Loading...</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff69b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 12h-3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2Z"/>
+                        <path d="M17 17h-3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2Z"/>
+                        <path d="M7 7h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/>
+                        <path d="M7 12h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2Z"/>
+                    </svg>
                 </div>
             </div>
         </div>
 
         <div class="leaderboard">
-            <h2 class="leaderboard-title">LEADERBOARD</h2>
-            <div class="leaderboard-list">
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>ProGamer123</span>
-                    <span class="score">9850</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>GameMaster</span>
-                    <span class="score">9340</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>ElitePlayer</span>
-                    <span class="score">8920</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>LegendStatus</span>
-                    <span class="score">8760</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>VictoryRoyal</span>
-                    <span class="score">8450</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>TopTier</span>
-                    <span class="score">8120</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>ProChampion</span>
-                    <span class="score">7890</span>
-                </div>
-                <div class="leaderboard-item">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop" class="leaderboard-avatar" alt="Player avatar">
-                    <span>EliteWarrior</span>
-                    <span class="score">7560</span>
-                </div>
+            <h2 class="leaderboard-title">GLOBAL LEADERBOARD</h2>
+            <div id="leaderboardList" class="leaderboard-list">
+                <!-- Leaderboard items will be dynamically inserted here -->
             </div>
         </div>
     </main>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js';
+        import { getFirestore, doc, getDoc, collection, query, orderBy, limit, getDocs } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDn6WbXzDYx-gZ1KInvzGD1bkLGdHdt9h0",
+            authDomain: "login-with-firebase-data-84ad9.firebaseapp.com",
+            projectId: "login-with-firebase-data-84ad9",
+            storageBucket: "login-with-firebase-data-84ad9.appspot.com",
+            messagingSenderId: "939532832658",
+            appId: "1:939532832658:web:df10ae63062aabf692fb4b"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore();
+
+        // Quotes for carousel
         const quotes = [
-            "Always join new players with your personalised link to gain more points",
-            "Challenge yourself to reach new heights in your gaming journey",
-            "Connect with players worldwide and climb the leaderboard",
-            "Every game is a chance to beat your personal best"
+            "Challenge yourself to reach new heights!",
+            "Every game is a chance to beat your best!",
+            "Join the elite ranks of top players!",
+            "Can you make it to the leaderboard?",
+            "Your next game could be your best!"
         ];
 
         let currentQuote = 0;
         const quoteElement = document.querySelector('.quote-text');
 
-        setInterval(() => {
-            currentQuote = (currentQuote + 1) % quotes.length;
+        function updateQuote() {
             quoteElement.style.opacity = 0;
             setTimeout(() => {
+                currentQuote = (currentQuote + 1) % quotes.length;
                 quoteElement.textContent = `"${quotes[currentQuote]}"`;
                 quoteElement.style.opacity = 1;
             }, 500);
-        }, 5000);
+        }
 
-        // Navigation highlight
-        const navLinks = document.querySelectorAll('.nav-links a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                navLinks.forEach(l => l.classList.remove('active'));
-                e.target.classList.add('active');
-            });
+        setInterval(updateQuote, 5000);
+
+        // Check authentication and load user data
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    const userData = userDoc.data();
+                    document.getElementById('loggedUserName').textContent = userData.firstName || 'Player';
+                    document.getElementById('userHighScore').textContent = userData.highScore || '0';
+                    document.getElementById('gamesPlayed').textContent = userData.gamesPlayed || '0';
+                    
+                    // Load user avatar
+                    const savedImage = localStorage.getItem('profileImage');
+                    if (savedImage) {
+                        document.getElementById('userAvatar').src = savedImage;
+                    }
+                }
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Load leaderboard
+        async function loadLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            const scoresRef = collection(db, 'scores');
+            const q = query(scoresRef, orderBy('score', 'desc'), limit(10));
+            
+            try {
+                const querySnapshot = await getDocs(q);
+                let topScore = 0;
+                let html = '';
+                
+                const scores = await Promise.all(querySnapshot.docs.map(async (doc) => {
+                    const scoreData = doc.data();
+                    const userDoc = await getDoc(doc(db, 'users', doc.id));
+                    const userData = userDoc.exists() ? userDoc.data() : { firstName: 'Unknown', lastName: 'Player' };
+                    
+                    if (scoreData.score > topScore) topScore = scoreData.score;
+                    
+                    return {
+                        name: `${userData.firstName} ${userData.lastName}`,
+                        score: scoreData.score,
+                        avatar: userData.avatar || 'https://via.placeholder.com/40',
+                        timestamp: scoreData.timestamp
+                    };
+                }));
+
+                document.getElementById('topScore').textContent = topScore;
+
+                scores.forEach((score, index) => {
+                    html += `
+                        <div class="leaderboard-item fade-in" style="animation-delay: ${index * 0.1}s">
+                            <img src="${score.avatar}" class="leaderboard-avatar" alt="Player avatar">
+                            <div class="leaderboard-info">
+                                <div class="leaderboard-name">${score.name}</div>
+                                <div class="leaderboard-date">${new Date(score.timestamp).toLocaleDateString()}</div>
+                            </div>
+                            <span class="score">${score.score}</span>
+                            ${index < 3 ? `<img src="https://api.iconify.design/emojione:trophy.svg?color=%23ffd700" class="achievement-badge" alt="Trophy">` : ''}
+                        </div>
+                    `;
+                });
+
+                leaderboardList.innerHTML = html;
+            } catch (error) {
+                console.error('Error loading leaderboard:', error);
+            }
+        }
+
+        // Initial leaderboard load
+        loadLeaderboard();
+
+        // Refresh leaderboard periodically
+        setInterval(loadLeaderboard, 30000);
+
+        // Profile navigation
+        document.getElementById('userProfileNav').addEventListener('click', () => {
+            window.location.href = 'profile.html';
         });
     </script>
 </body>
