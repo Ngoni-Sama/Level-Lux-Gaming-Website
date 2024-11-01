@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dino Runner - Livelle Luxe</title>
+    <title>Dino Game - Livelle Luxe</title>
     <style>
         * {
             margin: 0;
@@ -16,18 +16,16 @@
             background-color: #0e1218;
             color: white;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .navbar {
             background-color: #1a2028;
-            padding: 1rem 2rem;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
         }
 
         .logo {
@@ -38,56 +36,30 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            position: relative;
-        }
-
-        .nav-links a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #ff6b00;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            background: #2a3441;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 0.5rem;
         }
 
         .game-container {
+            flex: 1;
             display: flex;
-            padding: 5rem 1rem 1rem;
+            padding: 1rem;
             gap: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            justify-content: center;
+            align-items: center;
         }
 
         .game-area {
-            flex: 1;
             background: #1a2028;
+            padding: 1rem;
             border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
         }
 
         #gameCanvas {
@@ -135,6 +107,7 @@
 
         .mobile-controls {
             display: none;
+            justify-content: center;
             gap: 2rem;
             margin-top: 1rem;
         }
@@ -146,22 +119,13 @@
             padding: 1rem 2rem;
             border-radius: 12px;
             font-size: 1.1rem;
-            cursor: pointer;
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-            }
-
             .mobile-controls {
                 display: flex;
             }
-
+            
             .controls-info {
                 display: none;
             }
@@ -172,13 +136,9 @@
     <nav class="navbar">
         <div class="logo">Livelle Luxe</div>
         <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="game.html" class="active">Game</a>
-            <a href="profile.html">Profile</a>
-        </div>
-        <div class="user-profile">
-            <div class="user-avatar">👤</div>
-            <span id="loggedUserName">Player</span>
+            <a href="index.html">Home</a>
+            <a href="game.html">Game</a>
+            <a href="#">About</a>
         </div>
     </nav>
 
@@ -205,60 +165,25 @@
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
-        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js';
-        import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
-
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDn6WbXzDYx-gZ1KInvzGD1bkLGdHdt9h0",
-            authDomain: "login-with-firebase-data-84ad9.firebaseapp.com",
-            projectId: "login-with-firebase-data-84ad9",
-            storageBucket: "login-with-firebase-data-84ad9.appspot.com",
-            messagingSenderId: "939532832658",
-            appId: "1:939532832658:web:df10ae63062aabf692fb4b"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
-        const db = getFirestore();
-
+    <script>
         // Game variables
         let canvas, ctx;
         let player, obstacles;
         let gameLoop;
         let score = 0;
-        let highScore = 0;
+        let highScore = localStorage.getItem('highScore') || 0;
         let isJumping = false;
         let isDucking = false;
         let gameSpeed = 5;
         let spawnTimer = 0;
         let isGameOver = false;
-        let userId = null;
-
-        // Check authentication state
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-                const userDoc = await getDoc(doc(db, 'users', user.uid));
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    document.getElementById('loggedUserName').textContent = userData.firstName || 'Player';
-                    highScore = userData.highScore || 0;
-                    document.getElementById('highScore').textContent = highScore;
-                }
-            } else {
-                window.location.href = 'index.html';
-            }
-        });
 
         // Initialize game
         function initGame() {
             canvas = document.getElementById('gameCanvas');
             ctx = canvas.getContext('2d');
             
+            // Make canvas responsive
             function resizeCanvas() {
                 canvas.width = canvas.offsetWidth;
                 canvas.height = 300;
@@ -282,8 +207,10 @@
             isGameOver = false;
             gameSpeed = 5;
             updateScore();
+            document.getElementById('highScore').textContent = highScore;
         }
 
+        // Game loop
         function gameUpdate() {
             if (isGameOver) return;
             
@@ -331,22 +258,56 @@
             gameLoop = requestAnimationFrame(gameUpdate);
         }
 
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if ((e.code === 'Space' || e.code === 'ArrowUp') && !isJumping && !isGameOver) {
+                e.preventDefault();
+                jump();
+            } else if (e.code === 'ArrowDown' && !isGameOver) {
+                e.preventDefault();
+                duck(true);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.code === 'ArrowDown') {
+                duck(false);
+            }
+        });
+
+        // Mobile controls
+        document.getElementById('jumpButton').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (!isJumping && !isGameOver) jump();
+        });
+
+        document.getElementById('duckButton').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (!isGameOver) duck(true);
+        });
+
+        document.getElementById('duckButton').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            duck(false);
+        });
+
+        document.getElementById('startButton').addEventListener('click', startGame);
+
+        // Game functions
         function jump() {
-            if (!isJumping && !isGameOver) {
+            if (!isJumping) {
                 isJumping = true;
                 player.velocity = player.jumpForce;
             }
         }
 
         function duck(isDucking) {
-            if (!isGameOver) {
-                if (isDucking) {
-                    player.height = 30;
-                    player.y = canvas.height - 30;
-                } else {
-                    player.height = 60;
-                    player.y = canvas.height - 60;
-                }
+            if (isDucking) {
+                player.height = 30;
+                player.y = canvas.height - 30;
+            } else {
+                player.height = 60;
+                player.y = canvas.height - 60;
             }
         }
 
@@ -388,30 +349,18 @@
             currentScoreElement.textContent = displayScore;
         }
 
-        async function gameOver() {
+        function gameOver() {
             isGameOver = true;
             cancelAnimationFrame(gameLoop);
             const finalScore = Math.floor(score / 10);
             
-            if (userId && finalScore > highScore) {
+            if (finalScore > highScore) {
                 highScore = finalScore;
+                localStorage.setItem('highScore', highScore);
                 document.getElementById('highScore').textContent = highScore;
-                
-                try {
-                    await setDoc(doc(db, 'users', userId), {
-                        highScore: highScore,
-                        lastPlayed: new Date().toISOString()
-                    }, { merge: true });
-
-                    await setDoc(doc(db, 'scores', userId), {
-                        score: highScore,
-                        timestamp: new Date().toISOString()
-                    });
-                } catch (error) {
-                    console.error('Error updating score:', error);
-                }
             }
 
+            // Show game over message
             ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
@@ -429,43 +378,10 @@
             gameLoop = requestAnimationFrame(gameUpdate);
         }
 
-        // Event listeners
-        document.addEventListener('keydown', (e) => {
-            if ((e.code === 'Space' || e.code === 'ArrowUp') && !isJumping && !isGameOver) {
-                e.preventDefault();
-                jump();
-            } else if (e.code === 'ArrowDown' && !isGameOver) {
-                e.preventDefault();
-                duck(true);
-            }
+        // Initial setup
+        window.addEventListener('load', () => {
+            initGame();
         });
-
-        document.addEventListener('keyup', (e) => {
-            if (e.code === 'ArrowDown') {
-                duck(false);
-            }
-        });
-
-        // Mobile controls
-        document.getElementById('jumpButton').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            jump();
-        });
-
-        document.getElementById('duckButton').addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            duck(true);
-        });
-
-        document.getElementById('duckButton').addEventListener('touchend', (e) => {
-            e.preventDefault();
-            duck(false);
-        });
-
-        document.getElementById('startButton').addEventListener('click', startGame);
-
-        // Initialize on load
-        window.addEventListener('load', initGame);
     </script>
 </body>
 </html>
