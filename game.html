@@ -37,7 +37,7 @@
             color: #ff6b00;
             font-size: 1.5rem;
             font-weight: bold;
-            font-family: 'Pacifico', cursive;
+            font-family:'Pacifico',cursive;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -300,14 +300,19 @@
             color: #ff6b00;
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
 </head>
 <body>
     <nav class="navbar">
-        <a href="home.html" class="logo">Livelle Luxe</a>
+        <a href="home.html" class="logo">
+           
+            Livelle Luxe
+        </a>
         <div class="nav-links">
             <a href="home.html">Home</a>
             <a href="game.html" class="active">Game</a>
-            <a href="about.html">About</a>
+            <a href="about.html">about</a>
             <a href="profile.html">Profile</a>
         </div>
         <div class="user-profile">
@@ -320,12 +325,20 @@
 
     <div class="game-container">
         <div class="ad-space-horizontal">
-            <div id="horizontalAd">Advertisement Space</div>
+            <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-app-pub-5970393506694705"
+            data-ad-slot="5067699314"
+            data-ad-format="auto"></ins>
         </div>
 
         <div class="ad-container">
             <div class="ad-space">
-                <div id="leftAd">Advertisement Space</div>
+                <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-app-pub-5970393506694705"
+                data-ad-slot="9253249113"
+                data-ad-format="auto"></ins>
             </div>
 
             <div class="game-area">
@@ -336,155 +349,341 @@
                             <span id="currentScore" class="score-value">0</span>
                         </div>
                         <div class="score-item">
-                            <span class="score-label">BEST</span>
+                            <span class="score-label">HIGH SCORE</span>
                             <span id="highScore" class="score-value">0</span>
                         </div>
                     </div>
                 </div>
-                <canvas id="gameCanvas"></canvas>
+
+                <div style="position: relative;">
+                    <canvas id="gameCanvas"></canvas>
+                    <div id="gameOverOverlay" class="game-over-overlay">
+                        <div class="game-over-text">Game Over!</div>
+                        <div class="final-score">Score: <span id="finalScore">0</span></div>
+                        <button id="restartButton" class="control-button">Play Again</button>
+                    </div>
+                </div>
+
                 <div class="game-controls">
-                    <button id="startBtn" class="control-button">Start Game</button>
-                    <div class="controls-info">Use 'Up Arrow' or tap the screen to jump.</div>
+                    <button id="startButton" class="control-button">Start Game</button>
+                    <div class="controls-info">
+                        <p>Press SPACE to jump</p>
+                        <p>Press DOWN to duck</p>
+                    </div>
+                    <div class="mobile-controls">
+                        <button id="jumpButton" class="mobile-button">Jump</button>
+                        <button id="duckButton" class="mobile-button">Duck</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="mobile-controls">
-                <button class="mobile-button" id="jumpBtn">Jump</button>
+            <div class="ad-space">
+                <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-app-pub-5970393506694705"
+                data-ad-slot="9253249113"
+                data-ad-format="auto"></ins>
             </div>
         </div>
     </div>
 
-    <div class="game-over-overlay" id="gameOverOverlay">
-        <div class="game-over-text">Game Over</div>
-        <div class="final-score" id="finalScore"></div>
-        <button id="restartBtn" class="control-button">Restart</button>
-    </div>
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js';
+        import { getFirestore, doc, getDoc, updateDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js';
 
-    <script>
-        const gameCanvas = document.getElementById('gameCanvas');
-        const ctx = gameCanvas.getContext('2d');
-        let gameInterval;
-        let isGameRunning = false;
-        let score = 0;
-        const dino = {
-            x: 50,
-            y: 160,
-            width: 20,
-            height: 30,
-            speedY: 0,
-            jumpHeight: -8,
-            gravity: 0.5,
-            onGround: false,
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDn6WbXzDYx-gZ1KInvzGD1bkLGdHdt9h0",
+            authDomain: "login-with-firebase-data-84ad9.firebaseapp.com",
+            projectId: "login-with-firebase-data-84ad9",
+            storageBucket: "login-with-firebase-data-84ad9.appspot.com",
+            messagingSenderId: "939532832658",
+            appId: "1:939532832658:web:df10ae63062aabf692fb4b"
         };
 
-        const obstacles = [];
-        let currentScore = 0;
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const db = getFirestore();
+
+        let userId = null;
+        let userData = null;
+
+        // Game variables
+        let canvas, ctx;
+        let gameLoop;
+        let score = 0;
         let highScore = 0;
+        let isGameOver = false;
+        let gameSpeed = 3;
+        let groundY;
 
-        gameCanvas.width = 800;
-        gameCanvas.height = 200;
+        // Game objects
+        let player = {
+            x: 50,
+            y: 0,
+            width: 40,
+            height: 60,
+            velocity: 0,
+            gravity: 0.8,
+            jumpForce: -15,
+            isJumping: false,
+            isDucking: false
+        };
 
-        document.getElementById('startBtn').addEventListener('click', startGame);
-        document.getElementById('restartBtn').addEventListener('click', restartGame);
-        document.getElementById('jumpBtn').addEventListener('click', jump);
+        let obstacles = [];
+        const obstacleTypes = [
+            { width: 20, height: 40, type: 'cactus' },
+            { width: 40, height: 30, type: 'bird', y: 180 }
+        ];
 
-        function startGame() {
-            isGameRunning = true;
+        // Initialize game
+        function initGame() {
+            canvas = document.getElementById('gameCanvas');
+            ctx = canvas.getContext('2d');
+            
+            function resizeCanvas() {
+                canvas.width = canvas.offsetWidth;
+                canvas.height = 300;
+                groundY = canvas.height - 60;
+                player.y = groundY - player.height;
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
             score = 0;
-            dino.y = 160;
-            dino.speedY = 0;
-            dino.onGround = true;
-            obstacles.length = 0;
+            gameSpeed = 3;
+            obstacles = [];
+            isGameOver = false;
+            player.isJumping = false;
+            player.isDucking = false;
+            player.y = groundY - player.height;
+
             document.getElementById('gameOverOverlay').classList.remove('visible');
-            gameInterval = setInterval(updateGame, 20);
-            document.getElementById('startBtn').disabled = true;
+            updateScore();
         }
 
-        function restartGame() {
-            document.getElementById('restartBtn').disabled = false;
-            document.getElementById('startBtn').disabled = false;
-            startGame();
-        }
+        // Game loop
+        function gameUpdate() {
+            if (isGameOver) return;
 
-        function updateGame() {
-            if (isGameRunning) {
-                ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-                dino.speedY += dino.gravity;
-                dino.y += dino.speedY;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                if (dino.y > 160) {
-                    dino.y = 160;
-                    dino.speedY = 0;
-                    dino.onGround = true;
-                }
+            // Update player
+            if (player.isJumping) {
+                player.y += player.velocity;
+                player.velocity += player.gravity;
 
-                drawDino();
-                handleObstacles();
-                checkCollisions();
-                score++;
-                document.getElementById('currentScore').textContent = score;
-                if (score > highScore) {
-                    highScore = score;
-                    document.getElementById('highScore').textContent = highScore;
+                if (player.y > groundY - player.height) {
+                    player.y = groundY - player.height;
+                    player.isJumping = false;
+                    player.velocity = 0;
                 }
             }
-        }
 
-        function drawDino() {
-            ctx.fillStyle = '#ff6b00';
-            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
-        }
-
-        function jump() {
-            if (dino.onGround) {
-                dino.speedY = dino.jumpHeight;
-                dino.onGround = false;
-            }
-        }
-
-        function handleObstacles() {
+            // Spawn obstacles
             if (Math.random() < 0.02) {
-                const obstacle = {
-                    x: gameCanvas.width,
-                    y: 160,
-                    width: 20,
-                    height: 20,
-                };
-                obstacles.push(obstacle);
+                spawnObstacle();
             }
 
-            for (let i = 0; i < obstacles.length; i++) {
-                obstacles[i].x -= 2;
-                ctx.fillStyle = '#00ff00';
-                ctx.fillRect(obstacles[i].x, obstacles[i].y, obstacles[i].width, obstacles[i].height);
+            // Update and draw obstacles
+            obstacles = obstacles.filter(obstacle => {
+                obstacle.x -= gameSpeed;
+                drawObstacle(obstacle);
+                return obstacle.x > -obstacle.width;
+            });
 
-                if (obstacles[i].x + obstacles[i].width < 0) {
-                    obstacles.splice(i, 1);
-                    i--;
-                }
+            // Check collisions
+            if (checkCollisions()) {
+                gameOver();
+                return;
             }
+
+            // Draw ground
+            ctx.fillStyle = '#666';
+            ctx.fillRect(0, groundY, canvas.width, 2);
+
+            // Draw player
+            drawPlayer();
+
+            // Update score and speed
+            score++;
+            gameSpeed += 0.001;
+            updateScore();
+
+            gameLoop = requestAnimationFrame(gameUpdate);
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = '#ff6b00';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function drawObstacle(obstacle) {
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        }
+
+        function spawnObstacle() {
+            const type = obstacleTypes[Math.floor(Math.random() * obstacleTypes.length)];
+            obstacles.push({
+                x: canvas.width,
+                y: type.y || groundY - type.height,
+                width: type.width,
+                height: type.height,
+                type: type.type
+            });
         }
 
         function checkCollisions() {
-            for (let i = 0; i < obstacles.length; i++) {
-                if (
-                    dino.x < obstacles[i].x + obstacles[i].width &&
-                    dino.x + dino.width > obstacles[i].x &&
-                    dino.y < obstacles[i].y + obstacles[i].height &&
-                    dino.y + dino.height > obstacles[i].y
-                ) {
-                    gameOver();
-                    break;
+            return obstacles.some(obstacle => {
+                return (
+                    player.x < obstacle.x + obstacle.width &&
+                    player.x + player.width > obstacle.x &&
+                    player.y < obstacle.y + obstacle.height &&
+                    player.y + player.height > obstacle.y
+                );
+            });
+        }
+
+        function updateScore() {
+            const displayScore = Math.floor(score / 10);
+            document.getElementById('currentScore').textContent = displayScore;
+        }
+
+        async function gameOver() {
+            isGameOver = true;
+            cancelAnimationFrame(gameLoop);
+            const finalScore = Math.floor(score / 10);
+            document.getElementById('finalScore').textContent = finalScore;
+            document.getElementById('gameOverOverlay').classList.add('visible');
+
+            if (finalScore > highScore) {
+                highScore = finalScore;
+                document.getElementById('highScore').textContent = highScore;
+
+                if (userId) {
+                    try {
+                        // Update user's high score
+                        await updateDoc(doc(db, 'users', userId), {
+                            highScore: highScore,
+                            gamesPlayed: (userData.gamesPlayed || 0) + 1
+                        });
+
+                        // Add to scores collection
+                        await setDoc(doc(db, 'scores', userId), {
+                            score: highScore,
+                            timestamp: new Date().toISOString()
+                        });
+                    } catch (error) {
+                        console.error('Error updating score:', error);
+                    }
                 }
             }
         }
 
-        function gameOver() {
-            isGameRunning = false;
-            clearInterval(gameInterval);
-            document.getElementById('finalScore').textContent = `Final Score: ${score}`;
-            document.getElementById('gameOverOverlay').classList.add('visible');
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if ((e.code === 'Space' || e.code === 'ArrowUp') && !player.isJumping && !isGameOver) {
+                e.preventDefault();
+                jump();
+            } else if (e.code === 'ArrowDown' && !isGameOver) {
+                e.preventDefault();
+                duck(true);
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.code === 'ArrowDown') {
+                duck(false);
+            }
+        });
+
+        function jump() {
+            if (!player.isJumping) {
+                player.isJumping = true;
+                player.velocity = player.jumpForce;
+            }
         }
+
+        function duck(isDucking) {
+            player.isDucking = isDucking;
+            if (isDucking) {
+                player.height = 30;
+                player.y = groundY - player.height;
+            } else {
+                player.height = 60;
+                player.y = groundY - player.height;
+            }
+        }
+
+        // Mobile controls
+        document.getElementById('jumpButton').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (!player.isJumping && !isGameOver) jump();
+        });
+
+        document.getElementById('duckButton').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (!isGameOver) duck(true);
+        });
+
+        document.getElementById('duckButton').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            duck(false);
+        });
+
+        // Game control buttons
+        document.getElementById('startButton').addEventListener('click', startGame);
+        document.getElementById('restartButton').addEventListener('click', startGame);
+
+        function startGame() {
+            initGame();
+            gameLoop = requestAnimationFrame(gameUpdate);
+        }
+
+        // Check authentication and load user data
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+                const userDoc = await getDoc(doc(db, 'users', userId));
+                if (userDoc.exists()) {
+                    userData = userDoc.data();
+                    document.getElementById('userName').textContent = userData.firstName || 'Player';
+                    highScore = userData.highScore || 0;
+                    document.getElementById('highScore').textContent = highScore;
+
+                    // Load user avatar
+                    const savedImage = localStorage.getItem('profileImage');
+                    if (savedImage) {
+                        document.getElementById('userAvatar').src = savedImage;
+                    }
+                }
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Initial setup
+        window.addEventListener('load', initGame);
     </script>
+    <script>
+        // Initialize a rewarded ad
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-app-pub-5970393506694705",
+            enable_page_level_ads: true
+        });
+    
+        function loadRewardedAd() {
+            // Replace with actual code to load and show rewarded ad
+            // Google AdMob documentation will provide the API to do this.
+        }
+    
+        // Trigger a call to show the rewarded ad where needed
+        document.getElementById('startButton').addEventListener('click', loadRewardedAd);
+    </script>
+    
 </body>
 </html>
